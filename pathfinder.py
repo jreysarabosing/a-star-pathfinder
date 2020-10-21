@@ -82,7 +82,7 @@ class Node:
 			self.neighbors.append(grid[self.row + 1][self.col])
 
 		# Check if node to the left of the current node is a valid neighbor
-		if self.row > 0 and not grid[self.row][self.col - 1].is_barrier():
+		if self.col > 0 and not grid[self.row][self.col - 1].is_barrier():
 			self.neighbors.append(grid[self.row][self.col - 1])
 
 		# Check if node to the right of the current node is a valid neighbor
@@ -202,10 +202,10 @@ def main(win, width):
 				pos = pygame.mouse.get_pos()
 				row, col = get_clicked_position(pos, ROWS, width)
 				node = grid[row][col]
-				if not start:
+				if not start and node != end:
 					start = node
 					start.make_start()
-				elif not end:
+				elif not end and node != start:
 					end = node
 					end.make_end()
 				elif node != start and node != end:
